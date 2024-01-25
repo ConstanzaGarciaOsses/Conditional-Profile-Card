@@ -29,21 +29,41 @@ function render(variables = {}) {
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
-  // reset the website body with the new html output
-  document.querySelector("#widget_content").innerHTML = `<div class="widget">
-            ${cover}
-          <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/school/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
-          </ul>
-        </div>
-    `;
+  // Con este codigo creo una variable que se "apalanca" de socialMediaPosition para determinar si los logos deben ir a la izquierda o derecha de la imagen
+  let iconPositionClass =
+    variables.socialMediaPosition === "position-right"
+      ? "position-right"
+      : "position-left";
+
+  // Comprobar si hay nombres y apellidos, y si no, asignar un valor predeterminado
+  let fullName =
+    variables.name && variables.lastName
+      ? `${variables.name} ${variables.lastName}`
+      : "Nombre Apellido";
+
+  let Rol = variables.role ? `${variables.role}` : "Trabajo";
+
+  let Localidad =
+    variables.city && variables.country
+      ? `${(variables.city, variables.country)}`
+      : "Localidad";
+
+  // resetear el contenido del cuerpo del sitio web con el nuevo HTML
+  document.querySelector(
+    "#widget_content"
+  ).innerHTML = `<div class="widget"> ${cover}
+    <img src="${variables.avatarURL}" class="photo" />
+    <h1>${fullName}</h1>
+    <h2>${Rol}</h2>
+    <h3>${Localidad}</h3>  
+    <ul class="${iconPositionClass}">
+      <li><a href="${variables.twitter}"><i class="fab fa-twitter"></i></a></li>
+      <li><a href="${variables.github}"><i class="fab fa-github"></i></a></li>
+      <li><a href="${variables.linkedin}"><i class="fab fa-linkedin"></i></a></li>
+      <li><a href="${variables.instagram}"><i class="fab fa-instagram"></i></a></li>
+    </ul>
+  </div>
+  `;
 }
 
 /**
