@@ -37,15 +37,15 @@ function render(variables = {}) {
 
   // Comprobar si hay nombres y apellidos, y si no, asignar un valor predeterminado
   let fullName =
-    variables.name && variables.lastName
+    variables.name || variables.lastName
       ? `${variables.name} ${variables.lastName}`
       : "Nombre Apellido";
 
   let Rol = variables.role ? `${variables.role}` : "Trabajo";
 
   let Localidad =
-    variables.city && variables.country
-      ? `${(variables.city, variables.country)}`
+    variables.city || variables.country
+      ? `${variables.city} ${variables.country}`
       : "Localidad";
 
   // resetear el contenido del cuerpo del sitio web con el nuevo HTML
